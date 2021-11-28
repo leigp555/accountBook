@@ -3,6 +3,7 @@
     <KeyBord/>
     <CountType/>
     <Remarks/>
+    <DisplayBox/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import KeyBord from "./KeyBord.vue";
 import CountType from "./CountType.vue";
 import Remarks from "./Remarks.vue";
+import DisplayBox from "./DisplayBox.vue";
 </script>
 
 <style lang="scss" scoped>
