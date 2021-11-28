@@ -1,7 +1,7 @@
 <template>
   <div class="container">
+    <KeyBord/>
     <CountType/>
-   <KeyBord/>
   </div>
 </template>
 
@@ -11,7 +11,9 @@ import CountType from "./CountType.vue";
 </script>
 
 <style lang="scss" scoped>
-.container{
+.container {
   height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
 }
 </style>
