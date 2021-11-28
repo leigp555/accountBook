@@ -1,5 +1,7 @@
 <template>
-<span>hello</span>
+<div class="content">
+  statistics
+</div>
 </template>
 
 <script lang="ts">
@@ -9,5 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.content{
+  height: 100%;
+}
 </style>
