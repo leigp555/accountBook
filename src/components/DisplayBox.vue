@@ -6,7 +6,6 @@
     <ol class="tag">
       <li v-for="item in label" :key="item">{{ item }}</li>
     </ol>
-
   </div>
 </template>
 
@@ -15,9 +14,11 @@ export default {
   name: "DisplayBox",
   props: {
     label: {
-      type: [],
-      default: ["衣", "食", "住", "行"]
+      type: Array,
+      default: ["食", "食", "住","衣"]
     }
+  },
+  setup(){
   }
 }
 </script>
@@ -61,11 +62,14 @@ export default {
 
     > li {
       display: inline;
-      margin: 10px 6px;
-      padding: 6px;
-      line-height: 1.5em;
+      height: 40px;
+      font-size: 14px;
+      margin: 4px;
+      padding: 10px;
       border-radius: 10px;
       background-color: #999999;
+      white-space: nowrap;
+      text-align: center;
     }
   }
 }

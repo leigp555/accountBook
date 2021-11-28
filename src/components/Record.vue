@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <KeyBord/>
-    <CountType/>
+    <CountType class="type"/>
     <Remarks/>
     <DisplayBox/>
   </div>
@@ -19,5 +19,8 @@ import DisplayBox from "./DisplayBox.vue";
   height: 100%;
   display: flex;
   flex-direction: column-reverse;
+  >.type{
+    background-color: #c4c4c4;
+  }
 }
 </style>
