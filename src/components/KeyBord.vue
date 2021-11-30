@@ -29,6 +29,7 @@ import {ref} from "vue";
 import {computer} from "../assets/computer";
 const padNumber = ref<string>("")
 const emit=defineEmits(["update:money"])
+const props=defineProps({fn:Function})
 const commit=()=>{
   emit("update:money",padNumber.value)
 }
@@ -39,7 +40,10 @@ const onClick = (e: any) => {
   }catch (error){
     padNumber.value=""
   }
-  if(innerText==="完成")commit()
+  if(innerText==="完成"){
+    commit()
+    props.fn()
+  }
   if(innerText==="清除")commit()
 }
 

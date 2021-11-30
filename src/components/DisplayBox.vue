@@ -5,7 +5,7 @@
       <input type="text" placeholder="输入标签名" v-model.lazy="newTag" @change="addTag"/>
     </label>
     <ol class="tag">
-      <li @click="tagSelected(item)" v-for="item in label" :key="item.id">{{ item.name }}</li>
+      <li @click.once="tagSelected(item)" v-for="(item,index) in label" :key="index">{{ item.name }}</li>
     </ol>
   </div>
 </template>

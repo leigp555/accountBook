@@ -7,12 +7,8 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 const selected=ref<boolean>(false)
-const root=ref<HTMLDivElement>("")
-onMounted(()=>{
-  console.log(root.value.childNodes)
-})
 const emit = defineEmits(["update:type"])
 const toggle = (e: any) => {
   if (e.target.innerText === "收入") {
