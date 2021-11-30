@@ -1,9 +1,9 @@
 <template>
   <div v-bind="$attrs">
     <div class="dataExhibition">
-      <span>0</span>
+      <span ref="showNumber">{{ padNumber ? padNumber : 0 }}</span>
     </div>
-    <div class="inputPad">
+    <div @click="onClick" class="inputPad">
       <button>7</button>
       <button>8</button>
       <button>9</button>
@@ -18,20 +18,31 @@
       <button>-</button>
       <button>.</button>
       <button>0</button>
-      <button>
-        <svg class="icon">
-          <use xlink:href="#icon-delete"></use>
-        </svg>
-      </button>
+      <button>清除</button>
       <button>完成</button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "KeyBord"
+<script lang="ts" setup>
+import {ref} from "vue";
+import {computer} from "../assets/computer";
+const padNumber = ref<string>("")
+const emit=defineEmits(["update:money"])
+const commit=()=>{
+  emit("update:money",padNumber.value)
 }
+const onClick = (e: any) => {
+  const innerText:string=e.target.innerText
+  try{
+    computer(padNumber,innerText)
+  }catch (error){
+    padNumber.value=""
+  }
+  if(innerText==="完成")commit()
+  if(innerText==="清除")commit()
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +59,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+
   > button {
     flex-grow: 1;
     font-size: 18px;
@@ -58,12 +70,4 @@ export default {
     border: 1px solid #999;
   }
 }
-.icon {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle;
-  fill: currentColor;
-  overflow: hidden;
-}
-
 </style>

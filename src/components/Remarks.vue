@@ -2,16 +2,19 @@
   <div class="remark" v-bind="$attrs">
     <label >
       <span>备注:</span>
-
-      <input type="text" placeholder="在这里添加备注">
+      <input type="text" placeholder="在这里添加备注" v-model="remark" @change="onInput" >
     </label>
   </div>
 
 </template>
 
-<script lang="ts">
-export default {
-  name: "Remarks"
+<script lang="ts" setup>
+import {ref} from "vue";
+const remark=ref<number|string>("")
+const emit=defineEmits(["update:remark"])
+const onInput=()=>{
+  emit("update:remark",remark.value)
+  remark.value=""
 }
 </script>
 

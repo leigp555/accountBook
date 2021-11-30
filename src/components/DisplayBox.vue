@@ -1,25 +1,29 @@
 <template>
   <div class="displayBox" v-bind="$attrs">
     <label>
-      <span>新增标签:</span><input type="text" placeholder="输入标签名">
+      <span>新增标签:</span>
+      <input type="text" placeholder="输入标签名" v-model.lazy="newTag" @change="addTag"/>
     </label>
     <ol class="tag">
-      <li v-for="item in label" :key="item">{{ item }}</li>
+      <li @click="tagSelected(item)" v-for="item in label" :key="item.id">{{ item.name }}</li>
     </ol>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "DisplayBox",
-  props: {
-    label: {
-      type: Array,
-      default: ["食", "食", "住","衣"]
-    }
-  },
-  setup(){
-  }
+<script lang="ts" setup>
+import {ref} from "vue";
+
+defineProps({
+  label: Array,
+})
+const emit = defineEmits(["update:selectedLabel", "update:newTag"])
+const tagSelected = (tag: string) => {
+  emit("update:selectedLabel", tag)
+}
+const newTag=ref<string|number>("")
+const addTag=()=>{
+  emit("update:newTag",newTag.value)
+  newTag.value=""
 }
 </script>
 
@@ -49,6 +53,7 @@ export default {
       font-size: 14px;
       margin-left: 8px;
       font-family: PingFang-SC-Regular, system-ui;
+
       &:focus {
         outline: none;
       }
