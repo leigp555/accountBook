@@ -16,7 +16,7 @@ import {computed,ref, watchEffect} from "vue";
 import {labelDate, useData} from "../assets/data";
 
 const label:label=labelDate.getLabels()||[]
-const detailData:array=useData.getDate()||[]
+const detailData:Array=useData.getDate()||[]
 const selectedLabel = ref([])         //选中的标签
 const newTag = ref<string>("")
 watchEffect(() => {

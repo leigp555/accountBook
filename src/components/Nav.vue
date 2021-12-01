@@ -1,18 +1,18 @@
 <template>
   <div class="nav">
-    <router-link to="detail">
+    <router-link to="/detail">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-detail"></use>
       </svg>
       <span>明细</span>
     </router-link>
-    <router-link to="record">
+    <router-link to="/record">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-record"></use>
       </svg>
       <span>记账</span>
     </router-link>
-    <router-link to="statistics">
+    <router-link to="/statistics">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-statistics"></use>
       </svg>

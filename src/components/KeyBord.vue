@@ -42,7 +42,7 @@ const onClick = (e: any) => {
   }
   if(innerText==="完成"){
     commit()
-    props.fn()
+    if (props.fn)props.fn()
   }
   if(innerText==="清除")commit()
 }

@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 
-defineProps({
+const props=defineProps({
   label: Array,
 })
 const emit = defineEmits(["update:selectedLabel", "update:newTag"])
@@ -21,9 +21,22 @@ const tagSelected = (tag: string) => {
   emit("update:selectedLabel", tag)
 }
 const newTag=ref<string|number>("")
+const bool=ref<boolean>(true)
 const addTag=()=>{
-  emit("update:newTag",newTag.value)
-  newTag.value=""
+  if(props.label){
+    props.label.forEach((item:object)=>{
+      if (item.name===newTag.value){
+        bool.value=false
+      }
+    })
+  }
+  if(bool.value===true){
+    emit("update:newTag",newTag.value)
+    newTag.value=""
+  }else {
+    alert("标签名重复")
+  }
+ bool.value=true
 }
 </script>
 

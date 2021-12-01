@@ -12,12 +12,7 @@ export const labelDate = {
         return JSON.parse(localStorage.getItem("labelDate") as string)
     },
     setLabel(data: [id: number, name: string]) {
-        const oldData = this.getLabels()
         const newData = JSON.stringify(data)
-        if (oldData === null) {
-            localStorage.setItem("labelDate", JSON.stringify(data))
-        } else {
-            localStorage.setItem("labelDate", newData)
-        }
+        localStorage.setItem("labelDate", newData)
     }
 }

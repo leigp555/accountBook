@@ -2,24 +2,25 @@
   <div class="container">
     <ol class="content">
       <li v-for="(item,index) in tag" :key="index">
-        <span>{{ item.tag }}</span>
+        <span>{{ item.name }}</span>
         <svg class="icon">
           <use xlink:href="#icon-select"></use>
         </svg>
+
       </li>
     </ol>
-    <button class="addNewTag">新建标签</button>
+    <button class="addNewTag" @click="toggle">新建标签</button>
   </div>
 
 </template>
 
 <script lang="ts" setup>
-const tag = [
-  {id: 1, tag: "衣"},
-  {id: 1, tag: "食"},
-  {id: 1, tag: "住"},
-  {id: 1, tag: "行"}
-]
+import {labelDate} from "../assets/data";
+
+const tag = labelDate.getLabels() || []
+const toggle = () => {
+
+}
 </script>
 
 <style lang="scss" scoped>
