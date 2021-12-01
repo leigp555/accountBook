@@ -2,8 +2,8 @@
   <div class="container">
     <KeyBord v-model:money="money" :fn="fn"/>
     <CountType class="type" v-model:type="type"/>
-    <Remarks v-model:remark="remarks"/>
-    <DisplayBox :label="label" @update:selectedLabel="selectedLabel.push($event)" v-model:newTag="newTag"/>
+    <Remarks v-model:remark="remarks" v-model:completed="completed"/>
+    <DisplayBox :label="label" v-model:selectedLabel="selectedLabel" v-model:newTag="newTag" v-model:completed="completed"/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import {labelDate, useData} from "../assets/data";
 
 const label:label=labelDate.getLabels()||[]
 const detailData:Array=useData.getDate()||[]
-const selectedLabel = ref([])         //选中的标签
+const selectedLabel = ref<string|number>("")         //选中的标签
 const newTag = ref<string>("")
 watchEffect(() => {
   if (newTag.value !== "")
@@ -31,13 +31,16 @@ const data = ref<object>({})
 const result = computed(() =>
     data.value = {type: type.value, selectedLabel: selectedLabel.value, remark: remarks.value, money: money.value}
 )
+const completed=ref<boolean>(false)
 const fn = () => {
-  if (selectedLabel.value.length===0){
+  if (selectedLabel.value===""){
     alert("必须选择一个标签")
   }else {
     detailData.push(result.value)
     useData.setDate(detailData)
     labelDate.setLabel(label)
+    completed.value=true
+    alert("记录成功")
   }
 }
 </script>

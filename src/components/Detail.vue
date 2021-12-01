@@ -1,66 +1,77 @@
 <template>
   <div class="container">
-    <ol class="content">
-      <li v-for="(item,index) in tag" :key="index">
-        <span>{{ item.name }}</span>
-        <svg class="icon">
-          <use xlink:href="#icon-select"></use>
-        </svg>
-
+    <CountType class="title" v-model:type="countType"/>
+    <ol v-if="countType==='+'">
+      <li v-for="(item,index) in income" :key="index">
+        <input :placeholder="item.selectedLabel.name" type="text">
+        <input :placeholder="item.remark" type="text">
+        <input :placeholder="'￥'+item.money" type="text">
       </li>
     </ol>
-    <button class="addNewTag" @click="toggle">新建标签</button>
+    <ol v-else-if="countType==='-'">
+      <li v-for="(item,index) in expenditure" :key="index">
+        <input :placeholder="item.selectedLabel.name" type="text">
+        <input :placeholder="item.remark" type="text">
+        <input :placeholder="'￥'+item.money" type="text">
+      </li>
+    </ol>
   </div>
-
 </template>
 
 <script lang="ts" setup>
-import {labelDate} from "../assets/data";
+import {computed, ref} from "vue";
+import {useData} from "../assets/data";
+import CountType from "./CountType.vue";
 
-const tag = labelDate.getLabels() || []
-const toggle = () => {
-
-}
+const data = ref<Array>()
+data.value = useData.getDate()
+const countType=ref<string>("-")
+const income=computed(()=>{
+   return data.value.filter(item=>{
+     if(item.type==="+"){
+       return item
+     }
+   }).reverse()
+})
+const expenditure=computed(()=>{
+  return data.value.filter(item=>{
+    if(item.type==="-"){
+      return item
+    }
+  }).reverse()
+})
 </script>
-
 <style lang="scss" scoped>
 .container {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
 
-  > .content {
-    overflow: auto;
-    margin-top: 20px;
+  > .title {
+    background-color: orange;
+  }
 
+  > ol {
+    margin: 0 auto;
     > li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      margin: 0 20px;
-      box-shadow: inset 0px -0.5px 0px #BCBBC1;;
-      font-size: 16px;
+      > input {
+        border: none;
+        margin: 0 5px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+      :first-child{
+        width: 4em;
+        text-align: left;
+      }
+      :nth-child(2){
+        width: 9em;
+        text-align: center;
+      }
+      :nth-child(3){
+        width: 4em;
+        text-align: right;
+      }
     }
   }
-
-  > .addNewTag {
-    width: 100px;
-    height: 50px;
-    align-self: center;
-    border: none;
-    background-color: orange;
-    border-radius: 10px;
-  }
-}
-
-
-.icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
 }
 </style>
