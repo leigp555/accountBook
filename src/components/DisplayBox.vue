@@ -5,7 +5,7 @@
       <input type="text" placeholder="输入标签名" v-model.lazy="newTag" @change="addTag"/>
     </label>
     <ol class="tag">
-      <li @click="(e)=>tagSelected(item,e)" v-for="(item,index) in label" :key="index">{{ item.name }}</li>
+      <li @click="(e)=>tagSelected(item,e)" v-for="(item,index) in label" :key="index" :title="item.name">{{ item.name }}</li>
     </ol>
   </div>
 </template>
@@ -94,13 +94,16 @@ const addTag = () => {
     > li {
       display: inline;
       height: 40px;
+      max-width: 5em;
       font-size: 14px;
       margin: 4px;
       padding: 10px;
       border-radius: 10px;
       background-color: #999999;
-      white-space: nowrap;
       text-align: center;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
     }
 
     > .domSelected {
